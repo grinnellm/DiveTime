@@ -1,2 +1,0 @@
-update.packages()
-update.packages(ask=FALSE)

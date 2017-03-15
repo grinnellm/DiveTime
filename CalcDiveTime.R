@@ -72,10 +72,10 @@ filesOK <- c( "xls", "xlsx" )
 
 # Choose input file interactively
 excelPath <- #"C:/Grinnell/Workspace/Sandbox/DivePay/Example.xlsx" 
-  "/Users/matthewgrinnell/Git/DivePay/Example.xlsx"
-# choose.files( caption="Select excel file with dive times", multi=FALSE, 
-#   filters=matrix(c("MS Excel", paste("*.", filesOK, sep="", collapse=";")), 
-#     nrow=1) )
+  #"/Users/matthewgrinnell/Git/DivePay/Example.xlsx"
+ choose.files( caption="Select excel file with dive times", multi=FALSE, 
+   filters=matrix(c("MS Excel", paste("*.", filesOK, sep="", collapse=";")), 
+     nrow=1) )
 
 
 ######################
