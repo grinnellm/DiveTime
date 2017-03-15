@@ -71,12 +71,11 @@ UsePackages( pkgs=c("tidyverse", "tools", "scales", "readxl", "xlsx") )
 filesOK <- c( "xls", "xlsx" )
 
 # Choose input file interactively
-excelPath <- #"C:/Grinnell/Workspace/Sandbox/DivePay/Example.xlsx" 
-  #"/Users/matthewgrinnell/Git/DivePay/Example.xlsx"
- choose.files( caption="Select excel file with dive times", multi=FALSE, 
-   filters=matrix(c("MS Excel", paste("*.", filesOK, sep="", collapse=";")), 
-     nrow=1) )
-
+excelPath <- choose.files( caption="Select excel file with dive times", 
+    multi=FALSE, filters=matrix(c("MS Excel", paste("*.", filesOK, sep="", 
+                collapse=";")), nrow=1) )
+#"C:/Grinnell/Workspace/Sandbox/DivePay/Example.xlsx"
+#"/Users/matthewgrinnell/Git/DivePay/Example.xlsx"
 
 ######################
 ##### Parameters #####
@@ -259,6 +258,7 @@ plotCumulativeHrs <- ggplot( data=adjHrsDayCum,
   geom_line(  ) +
   scale_x_date( labels=date_format("%Y-%m-%d") ) +
   labs( y=paste("Cumulative time (hours)", sep="" ) ) +
+  expand_limits( y=0 ) +
   theme_bw( ) +
   theme( legend.position=c(0, 1), legend.justification=c(0, 1),
     legend.background=element_rect(colour="black", fill="white"),

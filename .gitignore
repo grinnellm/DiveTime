@@ -50,4 +50,4 @@ Temporary Items
 *.pdf
 .Rhistory
 .Rapp.history
-*.Output.xlsx
+Example.Output.xlsx
