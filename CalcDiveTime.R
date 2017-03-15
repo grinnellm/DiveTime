@@ -13,12 +13,12 @@
 #
 # Overview: 
 # Read in a Microsoft excel file (.xls, .xlsx) with columns "Date" in the format 
-# "August 14, 2015", and Transect, as well as start and end times for each dive 
-# formatted as "15:12" for each diver, for example "MG.Start", and "MG.End". See 
-# the example dive times in "Example.xlsx." This data must be in the first 
-# worksheet in the excel file. If there are multiple excel sheets with dive 
-# times (i.e., for two different surveys), put each one in a separate directory. 
-# Determine daily payable dive time via: 
+# "August 14, 2015", and "Transect", as well as start and end times for each 
+# dive formatted as "15:12" for each diver, for example "MG.Start", and 
+# "MG.End". See the example dive times in "Example.xlsx." This data must be in 
+# the first worksheet in the excel file. If there are multiple excel sheets with 
+# dive times (i.e., for two different surveys), put each one in a separate 
+# directory. Determine daily payable dive time via: 
 #   1. Minimum of 2 hrs (variable 'minTime') if the diver was active; and 
 #   2. Round up to the nearest 15 mins (variable 'roundHr') if more than 2 hrs.
 # 
@@ -26,9 +26,8 @@
 # Various packages listed below.
 # 
 # Notes: 
-# This script has been tested on R 3.3.2 using Windows 7; it may or may not 
-# work on other platforms. I suspect that time may be wrong for dives that go
-# past midnight, but this has not been tested.
+# Dive times may be wrong for dives that go past midnight, but this has not been 
+# tested.
 #
 ###############################################################################
 
@@ -73,10 +72,10 @@ filesOK <- c( "xls", "xlsx" )
 
 # Choose input file interactively
 excelPath <- #"C:/Grinnell/Workspace/Sandbox/DivePay/Example.xlsx" 
-"/Users/matthewgrinnell/Git/DivePay/Example.xlsx"
-  # choose.files( caption="Select excel file with dive times", multi=FALSE, 
-  #   filters=matrix(c("MS Excel", paste("*.", filesOK, sep="", collapse=";")), 
-  #     nrow=1) )
+  "/Users/matthewgrinnell/Git/DivePay/Example.xlsx"
+# choose.files( caption="Select excel file with dive times", multi=FALSE, 
+#   filters=matrix(c("MS Excel", paste("*.", filesOK, sep="", collapse=";")), 
+#     nrow=1) )
 
 
 ######################
@@ -163,43 +162,25 @@ if( any(rawMins$Time <= 0) )  stop( "Non-positive dive time(s)", call.=FALSE )
 
 # Calculate dive time in minutes (raw) wide
 rawMinsWide <- rawMins %>%
-  spread( Diver, Time, fill=0 ) %>%
-  mutate( Date=as.character(Date) )
+  spread( Diver, Time, fill=0 )
 
 # Function to calculate column totals and bind to last row
 CalcTotal <- function( dat ) {
-  # If data has both Date and Transect
-  if( all(c("Date", "Transect") %in% names(dat)) ) {
-    # Grab the non-numeric columns
-    info <- dat %>% select( Date, Transect ) %>%
-      mutate( Date=as.character(Date), Transect=as.character(Transect) ) %>%
-      add_row( Date="Total", Transect="Total" )
-    # Grab the other columns
-    totTime <- dat %>%
-      select( -Date, -Transect ) %>%
-      colSums( ) %>%
-      t( ) %>%
-      as_tibble( )
-    # Add the 'total' row
-    df <- dat %>%
-      select( -Date, -Transect) %>%
-      bind_rows( totTime )
-  } else {  # End if Date and Transect, otherwise
-    # Grab the non-numeric columns
-    info <- dat %>% select( Date ) %>%
-      mutate( Date=as.character(Date) ) %>%
-      add_row( Date="Total" )
-    # Grab the other columns
-    totTime <- dat %>%
-      select( -Date ) %>%
-      colSums( ) %>%
-      t( ) %>%
-      as_tibble( )
-    # Add the 'total' row
-    df <- dat %>%
-      select( -Date ) %>%
-      bind_rows( totTime )
-  }  # End if only Date
+  # Grab the non-numeric columns, and add a row
+  info <- dat %>% 
+    mutate( Date=as.character(Date) ) %>%
+    keep( is.character ) %>%
+    add_row( Date="Total" )
+  # Grab the other columns
+  totTime <- dat %>%
+    keep( is.numeric) %>%
+    colSums( ) %>%
+    t( ) %>%
+    as_tibble( )
+  # Add the 'total' row
+  df <- dat %>%
+    keep( is.numeric ) %>%
+    bind_rows( totTime )
   # Re-combine the info and total times  
   res <- bind_cols( info, df )
   # Return the data
@@ -217,8 +198,7 @@ rawMinsDay <- rawMins %>%
 
 # Sum dive time in minutes by day (raw) wide
 rawMinsDayWide <- rawMinsDay %>%
-  spread( Diver, Time, fill=0 ) %>%
-  mutate( Date=as.character(Date) )
+  spread( Diver, Time, fill=0 )
 
 # Sum dive time in minutes by day (raw) with total
 rawMinsDayTot <- CalcTotal( dat=rawMinsDayWide )
@@ -247,8 +227,7 @@ adjHrsDayCum <- adjHrsDay %>%
 
 # Get dive time (adjusted) wide
 adjHrsDayWide <-adjHrsDay %>%
-  spread( Diver, Time, fill=0 ) %>%
-  mutate( Date=as.character(Date) )
+  spread( Diver, Time, fill=0 )
 
 # Get dive time (adjusted) with total
 adjHrsDayTot <- CalcTotal( dat=adjHrsDayWide )
@@ -269,7 +248,7 @@ plotRawMinutes <- ggplot( data=rawMins, aes(x=Diver, y=Time) ) +
   labs( y="Time (mins)") +
   theme_bw( ) +
   theme( legend.position="none" ) +
-  facet_wrap( ~ Date ) +
+  facet_wrap( ~ Date, ncol=xySize ) +
   ggsave( filename=file.path(outDir, "RawMinutes.pdf"), height=xySize*2+1, 
     width=xySize*3+1 )
 
