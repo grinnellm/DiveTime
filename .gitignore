@@ -49,5 +49,4 @@ Temporary Items
 # Custom files
 *.pdf
 .Rhistory
-
-.Rhistory
+.Rapp.history
