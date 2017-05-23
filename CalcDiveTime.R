@@ -245,6 +245,7 @@ plotRawMinutes <- ggplot( data=rawMins, aes(x=Diver, y=Time) ) +
   geom_hline( yintercept=120, linetype="dashed" ) + 
   coord_flip( ) +
   labs( y="Time (mins)") +
+  scale_y_continuous( breaks=seq(from=0, to=1000, by=60) ) +
   theme_bw( ) +
   theme( legend.position="none" ) +
   facet_wrap( ~ Date, ncol=xySize ) +
@@ -254,13 +255,13 @@ plotRawMinutes <- ggplot( data=rawMins, aes(x=Diver, y=Time) ) +
 # Plot cumulative dive time
 plotCumulativeHrs <- ggplot( data=adjHrsDayCum, 
   aes(x=Date, y=CTime, colour=Diver) ) +
-  geom_point(  ) + 
-  geom_line(  ) +
+  geom_point( size=4 ) + 
+  geom_line( size=1 ) +
   scale_x_date( labels=date_format("%Y-%m-%d") ) +
   labs( y=paste("Cumulative time (hours)", sep="" ) ) +
   expand_limits( y=0 ) +
   theme_bw( ) +
-  theme( legend.position=c(0, 1), legend.justification=c(0, 1),
+  theme( legend.position=c(0.005, 0.99), legend.justification=c(0, 1),
     legend.background=element_rect(colour="black", fill="white"),
     legend.key=element_rect(colour=NA) ) +
   ggsave( filename="CumulativeHrs.pdf", height=6, width=9 )
