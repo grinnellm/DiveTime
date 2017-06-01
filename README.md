@@ -1,3 +1,4 @@
 # Calculate payable dive time
 
-Calculate the payable dive time for one or more dives, by one or more divers, over one or more days, based on the start and end times of the dives.
+Calculate payable dive time based on dive start and end times, using a couple of rules.
+This script imports an excel file with start and end times by date and transect name, and can accomodate more than one dive per day, multiple divers, as well as multiple days.
