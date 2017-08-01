@@ -13,7 +13,7 @@ Note that the Excel file with dive start and end times must have a specific form
 The first column should be the `Date` in the format "August 14, 2015".
 The second column should be the `Transect` name or number.
 Then there should be two columns for each diver containing the start and end times of each dive formatted as `15:12`.
-The two columns for each diver should be the diver name followed by `.Start` and `.End` (e.g., `Matt.Start` and `Matt.End`.
+The two columns for each diver should be the diver name followed by `.Start` and `.End` (e.g., `Matt.Start` and `Matt.End`).
 See the example dive times in "Example.xlsx."
 This data must be in the first worksheet in the excel file.
 If there are multiple excel sheets with dive times (e.g., two different surveys), put them in separate folders.
