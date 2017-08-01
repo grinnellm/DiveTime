@@ -17,4 +17,4 @@ The two columns for each diver should be the diver name followed by `.Start` and
 See the example dive times in "Example.xlsx."
 This data must be in the first worksheet in the excel file.
 If there are multiple excel sheets with dive times (e.g., two different surveys), put them in separate folders.
-**Pro Tip: Make a copy of the example Excel file, and enter your dive times there.**
+**ProTip**: Make a copy of the example Excel file, and enter your dive times there.
