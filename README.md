@@ -5,9 +5,9 @@ This script imports an excel file with start and end times by date and transect 
 
 To calculate dive time:
 
-1. Set your **R** working directory to the location of the script `CalcDiveTime.R`.
+1. Set your **R** working directory to the folder that contains the script "CalcDiveTime.R".
 2. Source the script `source( file="CalcDiveTime.R" )`.
-3. A pop-up window will open; select the Excel file that has dive start and end times.
+3. A pop-up window will open; select the Excel file with dive start and end times.
 
 Note that the Excel file with dive start and end times must have a specific format.
 The first column should be the `Date` in the format "August 14, 2015".
@@ -16,5 +16,5 @@ Then there should be two columns for each diver containing the start and end tim
 The two columns for each diver should be the diver name followed by `.Start` and `.End` (e.g., `Matt.Start` and `Matt.End`.
 See the example dive times in "Example.xlsx."
 This data must be in the first worksheet in the excel file.
-If there are multiple excel sheets with dive times (i.e., for two different surveys), put each one in a separate directory.
+If there are multiple excel sheets with dive times (e.g., two different surveys), put them in separate folders.
 **Pro Tip: Make a copy of the example Excel file, and enter your dive times there.**
