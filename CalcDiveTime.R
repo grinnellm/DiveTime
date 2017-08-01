@@ -12,13 +12,8 @@
 # Date edited:  May 08, 2016
 #
 # Overview: 
-# Read in a Microsoft excel file (.xls, .xlsx) with columns "Date" in the format 
-# "August 14, 2015", and "Transect", as well as start and end times for each 
-# dive formatted as "15:12" for each diver, for example "MG.Start", and 
-# "MG.End". See the example dive times in "Example.xlsx." This data must be in 
-# the first worksheet in the excel file. If there are multiple excel sheets with 
-# dive times (i.e., for two different surveys), put each one in a separate 
-# directory. Determine daily payable dive time via: 
+# Read in a Microsoft Excel file (*.xls, *.xlsx) with Date, Transet, as well as
+# start and end times for each diver. Determine daily payable dive time via: 
 #   1. Minimum of 2 hrs (variable 'minTime') if the diver was active; and 
 #   2. Round up to the nearest 15 mins (variable 'roundHr') if more than 2 hrs.
 # 
