@@ -115,10 +115,20 @@ diveDat <- read_excel( path=file.path(outDir, excelIn), sheet=1 )
 ################     
 
 # Grab date and transect columns
-dt <- select( diveDat, Date, Transect )
+dt <- diveDat %>% 
+  select( Date, Transect )
 
 # Check for NAs, error
 if( any(is.na(dt)) )  stop( "Missing Date or Transect values", call.=FALSE )
+
+# Check for divers with no dive times
+diveTimes <- diveDat %>%
+  select( -Date, -Transect ) %>%
+  apply( MARGIN=2, FUN=function(x) all(is.na(x)) )
+
+# Warning message if diver(s) have all NAs
+if( any(diveTimes) )  stop( "Diver(s) have no dive times: ", 
+      paste(names(diveTimes)[diveTimes], collapse=", "), call.=FALSE )
 
 # Format dive data: calculate dive time based on start and end times
 rawMins <- diveDat %>%
