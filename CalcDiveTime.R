@@ -26,6 +26,11 @@
 #
 ###############################################################################
 
+# Messages
+message( "This script has not been tested for dives that span midnight" )
+message( "This script does not account for additional dive time when dives",
+    " spawn more than an 8 hr interval in one day (Issue #2)")
+
 
 ########################
 ##### Housekeeping #####
@@ -54,7 +59,7 @@ UsePackages <- function( pkgs, update=FALSE, locn="http://cran.rstudio.com/" ) {
 # Make packages available
 UsePackages( pkgs=c("tidyverse", "tools", "scales", "readxl", "xlsx") )
 
-## Note: Re-install if weird error message re WithCallingHandlers
+# Note: re-install if weird error message re WithCallingHandlers
 #require( "Rcpp" )  
 
 
