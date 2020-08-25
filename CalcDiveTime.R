@@ -28,8 +28,8 @@
 
 # Messages
 message( "This script has not been tested for dives that span midnight" )
-message( "This script does not account for additional dive time when dives",
-    " spawn more than an 8 hr interval in one day (Issue #2)")
+message( "This script does not account for additional dive time when dives\n",
+    "\tspawn more than an 8 hr interval in one day (Issue #2)")
 
 
 ########################
