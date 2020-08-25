@@ -87,6 +87,9 @@ minTime <- 120
 # Rule 2: round up to nearest portion of an hour (i.e., 4 = quarter hour)
 roundHr <- 4
 
+# Figure resolution: dots per inch
+figDPI <- 600
+
 
 ################
 ##### Data #####
@@ -259,8 +262,8 @@ plotRawMinutes <- ggplot( data=rawMins, aes(x=Diver, y=Time) ) +
     theme_bw( ) +
     theme( legend.position="none" ) +
     facet_wrap( ~ Date, ncol=xySize ) +
-    ggsave( filename=file.path(outDir, "RawMinutes.pdf"), height=xySize*2+1, 
-        width=xySize*3+1 )
+    ggsave( filename=file.path(outDir, "RawMinutes.png"), height=xySize*2+1, 
+        width=xySize*3+1, dpi=figDPI )
 
 # Plot cumulative dive time
 plotCumulativeHrs <- ggplot( data=adjHrsDayCum, 
@@ -274,7 +277,7 @@ plotCumulativeHrs <- ggplot( data=adjHrsDayCum,
     theme( legend.position=c(0.005, 0.99), legend.justification=c(0, 1),
         legend.background=element_rect(colour="black", fill="white"),
         legend.key=element_rect(colour=NA) ) +
-    ggsave( filename="CumulativeHrs.pdf", height=6, width=9 )
+    ggsave( filename="CumulativeHrs.png", height=6, width=9, dpi=figDPI )
 
 
 ##################
