@@ -100,8 +100,7 @@ inBase <- file_path_sans_ext(excelIn)
 
 # Stop if it's not xlsx
 if (!inExt %in% filesOK) {
-  stop("Input file must be one of ", filesOK,
-    call. = FALSE
+  stop("Input file must be one of ", filesOK, call. = FALSE
   )
 }
 
@@ -113,7 +112,6 @@ excelOut <- paste(inBase, "Output", inExt, sep = ".")
 
 # Load the dive data (i.e., start and end times by person and day)
 diveDat <- read_excel(path = file.path(outDir, excelIn), sheet = 1)
-
 
 ##### Main #####
 
@@ -132,8 +130,7 @@ diveTimes <- diveDat %>%
 # Warning message if diver(s) have all NAs
 if (any(diveTimes)) {
   stop("Diver(s) have no dive times: ",
-    paste(names(diveTimes)[diveTimes], collapse = ", "),
-    call. = FALSE
+    paste(names(diveTimes)[diveTimes], collapse = ", "), call. = FALSE
   )
 }
 
@@ -271,8 +268,7 @@ ggsave(
 
 # Plot cumulative dive time
 plotCumulativeHrs <- ggplot(
-  data = adjHrsDayCum,
-  aes(x = Date, y = CTime, colour = Diver)
+  data = adjHrsDayCum, aes(x = Date, y = CTime, colour = Diver)
 ) +
   geom_point(size = 4) +
   geom_line(linewidth = 1) +
