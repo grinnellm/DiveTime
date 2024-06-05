@@ -100,8 +100,7 @@ inBase <- file_path_sans_ext(excelIn)
 
 # Stop if it's not xlsx
 if (!inExt %in% filesOK) {
-  stop("Input file must be one of ", filesOK, call. = FALSE
-  )
+  stop("Input file must be one of ", filesOK, call. = FALSE)
 }
 
 # Get path to output files to same directory as input
