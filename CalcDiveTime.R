@@ -261,9 +261,10 @@ plotRawMinutes <- ggplot( data=rawMins, aes(x=Diver, y=Time) ) +
     scale_y_continuous( breaks=seq(from=0, to=1000, by=60) ) +
     theme_bw( ) +
     theme( legend.position="none" ) +
-    facet_wrap( ~ Date, ncol=xySize ) +
-    ggsave( filename=file.path(outDir, "RawMinutes.png"), height=xySize*2+1, 
-        width=xySize*3+1, dpi=figDPI )
+    facet_wrap( ~ Date, ncol=xySize )
+# Save the plot
+ggsave( plot = plotRawMinutes, filename=file.path(outDir, "RawMinutes.png"),
+        height=xySize*2+1, width=xySize*3+1, dpi=figDPI )
 
 # Plot cumulative dive time
 plotCumulativeHrs <- ggplot( data=adjHrsDayCum, 
@@ -276,8 +277,10 @@ plotCumulativeHrs <- ggplot( data=adjHrsDayCum,
     theme_bw( ) +
     theme( legend.position=c(0.005, 0.99), legend.justification=c(0, 1),
         legend.background=element_rect(colour="black", fill="white"),
-        legend.key=element_rect(colour=NA) ) +
-    ggsave( filename="CumulativeHrs.png", height=6, width=9, dpi=figDPI )
+        legend.key=element_rect(colour=NA) )
+# Save the plot
+ggsave( plot = plotCumulativeHrs, filename="CumulativeHrs.png", height=6, width=9,
+        dpi=figDPI )
 
 
 ##################
