@@ -54,6 +54,9 @@ UsePackages <- function(
 # Make packages available
 UsePackages(pkgs = c("tidyverse", "tools", "scales", "readxl", "xlsx"))
 
+# Keep group function quiet
+options(dplyr.summarise.inform = FALSE)
+
 # Note: re-install if weird error message re WithCallingHandlers
 # require( "Rcpp" )
 
@@ -272,13 +275,13 @@ plotCumulativeHrs <- ggplot(
   aes(x = Date, y = CTime, colour = Diver)
 ) +
   geom_point(size = 4) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_x_date(labels = date_format("%Y-%m-%d")) +
   labs(y = paste("Cumulative time (hours)", sep = "")) +
   expand_limits(y = 0) +
   theme_bw() +
   theme(
-    legend.position = c(0.005, 0.99), legend.justification = c(0, 1),
+    legend.position = "top",
     legend.background = element_rect(colour = "black", fill = "white"),
     legend.key = element_rect(colour = NA)
   )
