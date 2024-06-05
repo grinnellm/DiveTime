@@ -1,8 +1,9 @@
+##### Header #####
 # Author:       Matthew H. Grinnell
 # Affiliation:  Pacific Biological Station, Fisheries and Oceans Canada (DFO)
 # Group:        Herring, Marine Ecosystems and Aquaculture Division
 # Address:      3190 Hammond Bay Road, Nanaimo, BC, Canada, V9T 6N7
-# Contact:      e-mail: matthew.grinnell@dfo-mpo.gc.ca | tel: 778.268.1026
+# Contact:      matthew.grinnell@dfo-mpo.gc.ca | 778.268.1026
 # Code name:    CalcDiveTime.R
 # Version:      2.0
 # Date started: May 08, 2015
@@ -18,26 +19,30 @@
 # Various packages listed below.
 #
 # Notes:
-# Dive times may be wrong for dives that go past midnight,
-# but this has not been tested.
+# Dive times may be wrong due to Issues #2 and #4;
+# see https://github.com/grinnellm/DiveTime/issues
 
-# Messages
-message("This script has not been tested for dives that span midnight")
+# Issue #2
 message(
   "This script does not account for additional dive time when dives\n",
   "\tspawn more than an 8 hr interval in one day (Issue #2)"
+)
+
+# Issue #4
+message(
+  "This script has not been tested for dives that span midnight (Issue #4)"
 )
 
 ##### Housekeeping #####
 
 # General options
 rm(list = ls()) # Clear the workspace
-sTime <- Sys.time() # Start the timer
 graphics.off() # Turn graphics off
 
 # Install missing packages and load required packages (if required)
 UsePackages <- function(
-    pkgs, update = FALSE, locn = "http://cran.rstudio.com/") {
+    pkgs, update = FALSE, locn = "http://cran.rstudio.com/"
+) {
   # Identify missing (i.e., not yet installed) packages
   newPkgs <- pkgs[!(pkgs %in% installed.packages()[, "Package"])]
   # Install missing packages if required
@@ -73,8 +78,6 @@ excelPath <- choose.files(
     collapse = ";"
   )), nrow = 1)
 )
-# "C:/Grinnell/Workspace/Sandbox/DivePay/Example.xlsx"
-# "/Users/matthewgrinnell/Git/DivePay/Example.xlsx"
 
 ##### Parameters #####
 
@@ -118,7 +121,7 @@ diveDat <- read_excel(path = file.path(outDir, excelIn), sheet = 1)
 dt <- diveDat %>%
   select(Date, Transect)
 
-# Check for NAs, error
+# Error if NAs
 if (any(is.na(dt))) stop("Missing Date or Transect values", call. = FALSE)
 
 # Check for divers with no dive times
@@ -276,9 +279,8 @@ plotCumulativeHrs <- ggplot(
   expand_limits(y = 0) +
   theme_bw() +
   theme(
-    legend.position = "top",
+    legend.key = element_rect(colour = NA), legend.position = "top",
     legend.background = element_rect(colour = "black", fill = "white"),
-    legend.key = element_rect(colour = NA)
   )
 
 # Save the plot
