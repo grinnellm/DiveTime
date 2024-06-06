@@ -10,7 +10,7 @@
 # Date edited:  June 05, 2024
 #
 # Overview:
-# Read in a Microsoft Excel file (*.xls, *.xlsx) with Date, Transet, as well as
+# Read in a Microsoft Excel file (*.xls, *.xlsx) with Date, Transect, as well as
 # start and end times for each diver. Determine daily payable dive time via:
 #   1. Minimum of 2 hrs (variable 'minTime') if the diver was active; and
 #   2. Round up to the nearest 15 mins (variable 'roundHr') if more than 2 hrs.
