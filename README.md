@@ -1,3 +1,7 @@
+# Superseded
+
+Use the [BubbleTime](https://github.com/grinnellm/BubbleTime) package instead.
+
 # Calculate dive time
 
 Calculate dive time based on dive start and end times, using a few rules.

@@ -79,6 +79,9 @@ excelPath <- choose.files(
   )), nrow = 1)
 )
 
+# Superceeded
+warning("`DiveTime` is superseded; use the `BubbleTime` package instead.")
+
 ##### Parameters #####
 
 # Rule 1: minimum daily dive time if any diving (mins)
